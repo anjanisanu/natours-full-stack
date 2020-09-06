@@ -1,13 +1,14 @@
 const express = require('express');
 const dotenv = require('dotenv');
 
+const tourRouter = require('./routes/tourRoutes');
+
 dotenv.config({ path: './config.env' });
 
 const app = express();
+app.use(express.json());
 
-app.get('/', (req, res) => {
-	res.send('HOME PAGE');
-});
+app.use('/api/v1/tours', tourRouter);
 
 const PORT = process.env.PORT;
 
