@@ -17,7 +17,7 @@ exports.getTour = (req, res) => {
 };
 
 exports.createTour = (req, res) => {
-	res.status(200).json({
+	res.status(201).json({
 		status: 'success',
 		data: {
 			tours: 'Create a tour'
