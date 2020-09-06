@@ -12,8 +12,4 @@ app.use(express.json());
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 
-const PORT = process.env.PORT;
-
-app.listen(PORT, () => {
-	console.log(`App is running on PORT ${PORT}`);
-});
+module.exports = app;
