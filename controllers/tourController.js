@@ -1,3 +1,5 @@
+const Tour = require('./../models/tourModel');
+
 exports.getAllTours = (req, res) => {
 	res.status(200).json({
 		status: 'success',
@@ -16,11 +18,13 @@ exports.getTour = (req, res) => {
 	});
 };
 
-exports.createTour = (req, res) => {
+exports.createTour = async (req, res) => {
+	const tour = await Tour.create(req.body);
+
 	res.status(201).json({
 		status: 'success',
 		data: {
-			tours: 'Create a tour'
+			tour
 		}
 	});
 };
