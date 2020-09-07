@@ -1,3 +1,13 @@
+exports.checkBody = (req, res, next) => {
+	if (!req.body.name || !req.body.price)
+		res.status(400).json({
+			status: 'fail',
+			message: 'Every tour must have a name & price'
+		});
+
+	next();
+};
+
 exports.getAllTours = (req, res) => {
 	res.status(200).json({
 		status: 'success',
