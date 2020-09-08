@@ -1,5 +1,13 @@
 const Tour = require('./../models/tourModel');
 
+exports.aliasTopTours = (req, res, next) => {
+	req.query.limit = '3';
+	req.query.sort = '-ratingsAverage, price';
+	req.query.fields = 'name,duration,summary,difficulty,startLocation,startDates,locations,maxGroupSize';
+
+	next();
+};
+
 exports.getAllTours = async (req, res) => {
 	try {
 		//BUILD QUERY
