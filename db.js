@@ -13,8 +13,8 @@ const connectDb = async () => {
 
 		console.log('Database Connected');
 	} catch (err) {
-		console.log('Some Error Occured While Connecting to Database.');
-		console.log(err);
+		console.log('Something went wrong while connecting to Database.');
+		console.log(err.message);
 	}
 };
 
