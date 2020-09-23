@@ -6,7 +6,7 @@ const handleDbCastError = (err) => {
 };
 
 const handleDbDuplicateError = (err) => {
-	const message = `Tour name '${err.keyValue.name}' already exists`;
+	const message = `'${err.keyValue.name}' already exists`;
 	return new AppError(message, 400);
 };
 
