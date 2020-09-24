@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema({
 			},
 			message: 'Both passwords does not match.'
 		}
+	},
+	passwordChangedAt: {
+		type: Date,
+		default: Date.now()
 	}
 });
 
@@ -45,6 +49,15 @@ userSchema.pre('save', async function(next) {
 //Instance Method
 userSchema.methods.correctPassword = async function(candidatePassword, userPassword) {
 	return await bcrypt.compare(candidatePassword, userPassword);
+};
+
+userSchema.methods.changedPasswordAfter = function(JWTTimeStamp) {
+	const changedTimeStamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
+	if (this.passwordChangedAt) {
+		return JWTTimeStamp < changedTimeStamp;
+	}
+
+	return false;
 };
 
 module.exports = mongoose.model('User', userSchema);
