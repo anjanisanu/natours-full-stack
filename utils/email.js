@@ -19,8 +19,6 @@ const sendEmail = async (options) => {
 		text: options.message
 	};
 
-	console.log(mailOptions);
-
 	// Send email with nodemailer
 	await transporter.sendMail(mailOptions);
 };
