@@ -10,19 +10,24 @@ const sendEmail = require('./../utils/email');
 const signToken = (id) => {
 	return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });
 };
+
+const createSendToken = (user, statusCode, res) => {
+	const token = signToken(user._id);
+
+	res.status(statusCode).json({
+		status: 'success',
+		token,
+		data: {
+			user
+		}
+	});
+};
+
 exports.signup = catchAsync(async (req, res, next) => {
 	const { name, email, password, passwordConfirm } = req.body;
 	const newUser = await User.create({ name, email, password, passwordConfirm });
 
-	const token = signToken(newUser._id);
-
-	res.status(201).json({
-		status: 'success',
-		token,
-		data: {
-			user: newUser
-		}
-	});
+	createSendToken(newUser, 201, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -35,12 +40,7 @@ exports.login = catchAsync(async (req, res, next) => {
 	if (!user || !await user.correctPassword(password, user.password))
 		return next(new AppError('Invaid User Credentials', 401));
 
-	const token = signToken(user._id);
-
-	res.status(200).json({
-		status: 'success',
-		token
-	});
+	createSendToken(user, 200, res);
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -82,7 +82,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 	await user.save({ validateBeforeSave: false });
 
 	const resetURL = `${req.protocol}://${req.get('host')}/api/v1/users/resetPassword/${resetToken}`;
-	const message = `Forgot Password? Submit your new password using this URL ${resetURL}. If this action is not initiated by you, please ignore this`;
+	const message = `Forgot Password? Submit your new password using this URL\n${resetURL}\nIf this action is not initiated by you, please ignore this`;
 
 	try {
 		await sendEmail({
@@ -96,10 +96,10 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 			message: 'Token sent to registered email'
 		});
 	} catch (err) {
-		// user.passwordResetToken = undefined;
-		// user.passwordResetExpires = undefined;
+		user.passwordResetToken = undefined;
+		user.passwordResetExpires = undefined;
 
-		// await user.save({ validateBeforeSave: false });
+		await user.save({ validateBeforeSave: false });
 		return next(
 			new AppError(`There was an error while sending email to registered email. Please try again later`, 500)
 		);
@@ -125,10 +125,22 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 	// Update changedPasswordAt property
 
 	// Log in the user, send JWT
-	const token = signToken(user._id);
+	createSendToken(user, 200, res);
+});
 
-	res.status(200).json({
-		status: 'success',
-		token
-	});
+exports.updatePassword = catchAsync(async (req, res, next) => {
+	// Get user from collection
+	const user = await User.findById(req.user.id).select('password');
+
+	// Check if posted password is correct
+	if (!await user.correctPassword(req.body.passwordCurrent, user.password))
+		return next(new AppError('Invalid Password', 401));
+
+	// Update Password
+	user.password = req.body.password;
+	user.passwordCurrent = req.body.passwordConfirm;
+	await user.save();
+
+	// Login the user, send JWT
+	createSendToken(user, 200, res);
 });
