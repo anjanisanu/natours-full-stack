@@ -1,4 +1,5 @@
 const express = require('express');
+const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 
 const AppError = require('./utils/appError');
@@ -9,6 +10,11 @@ const userRouter = require('./routes/userRoutes');
 const app = express();
 
 //Global Middlewares
+
+// Set Security HTTP Headers
+app.use(helmet());
+
+// Limit requests from same IP
 const limiter = rateLimit({
 	max: 100,
 	windowMs: 60 * 60 * 1000,
@@ -16,8 +22,11 @@ const limiter = rateLimit({
 });
 
 app.use('/api', limiter);
-app.use(express.json());
 
+// Body Parser, reading data from req.body
+app.use(express.json({ limit: '10kb' }));
+
+// Routes
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 
