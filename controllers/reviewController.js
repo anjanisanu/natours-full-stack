@@ -15,3 +15,15 @@ exports.getAllReviews = catchAsync(async (req, res, next) => {
 		}
 	});
 });
+
+exports.createReview = catchAsync(async (req, res, next) => {
+	const { review, rating, tour } = req.body;
+	const newReview = await Review.create({ review, rating, tour, user: req.user.id });
+
+	res.status(201).json({
+		status: 'success',
+		data: {
+			review: newReview
+		}
+	});
+});
