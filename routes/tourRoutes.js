@@ -8,6 +8,8 @@ const {
 	aliasTopTours
 } = require('./../controllers/tourController');
 const authController = require('./../controllers/authController');
+const reviewRouter = require('./reviewRoutes');
+const { route } = require('./reviewRoutes');
 
 const router = express.Router();
 
@@ -21,5 +23,7 @@ router
 	.get(getTour)
 	.patch(authController.protect, authController.restrictTo('admin', 'lead-guide'), updateTour)
 	.delete(authController.protect, authController.restrictTo('admin'), deleteTour);
+
+router.use('/:tourId/reviews', reviewRouter);
 
 module.exports = router;
