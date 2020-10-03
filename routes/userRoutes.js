@@ -22,7 +22,7 @@ router.route('/updatePassword').patch(authController.protect, authController.upd
 router.patch('/updateMe', authController.protect, updateMe);
 router.delete('/deleteMe', authController.protect, deleteMe);
 
-router.route('/').get(getAllUsers).post(createUser);
+router.route('/').get(getAllUsers);
 router.route('/:id').get(getUser).patch(updateUser).delete(deleteUser);
 
 module.exports = router;

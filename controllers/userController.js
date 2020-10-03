@@ -1,6 +1,7 @@
 const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
+const { getAll, getOne, updateOne, deleteOne } = require('./handleFactory');
 
 const filterObj = (obj, ...allowedFields) => {
 	const newObj = {};
@@ -10,44 +11,10 @@ const filterObj = (obj, ...allowedFields) => {
 	return newObj;
 };
 
-exports.getAllUsers = catchAsync(async (req, res) => {
-	const users = await User.find();
-
-	res.status(200).json({
-		status: 'success',
-		results: users.length,
-		data: {
-			users
-		}
-	});
-});
-
-exports.getUser = (req, res) => {
-	res.status(200).json({
-		status: 'success',
-		data: {
-			users: 'Displays single user details'
-		}
-	});
-};
-
-exports.createUser = (req, res) => {
-	res.status(201).json({
-		status: 'success',
-		data: {
-			users: 'Create user'
-		}
-	});
-};
-
-exports.updateUser = (req, res) => {
-	res.status(200).json({
-		status: 'success',
-		data: {
-			users: 'Update user'
-		}
-	});
-};
+exports.getAllUsers = getAll(User);
+exports.getUser = getOne(User);
+exports.updateUser = updateOne(User);
+exports.deleteUser = deleteOne(User);
 
 exports.updateMe = catchAsync(async (req, res, next) => {
 	// Create error if user post password data
@@ -74,12 +41,3 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
 		data: null
 	});
 });
-
-exports.deleteUser = (req, res) => {
-	res.status(204).json({
-		status: 'success',
-		data: {
-			users: 'Delete user'
-		}
-	});
-};
