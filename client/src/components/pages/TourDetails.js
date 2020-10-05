@@ -44,9 +44,9 @@ const TourDetails = ({ getTour, tour, match }) => {
 						</div>
 
 						<div className='section-tour__img'>
-							<img src='/img/tour-2-1.jpg' alt='Tour 1' />
-							<img src='/img/tour-2-2.jpg' alt='Tour 2' />
-							<img src='/img/tour-2-3.jpg' alt='Tour 3' />
+							<img src={`/img/tours/${tour.images[0]}`} alt={`${tour.name} 1`} />
+							<img src={`/img/tours/${tour.images[1]}`} alt={`${tour.name} 2`} />
+							<img src={`/img/tours/${tour.images[2]}`} alt={`${tour.name} 3`} />
 						</div>
 
 						<div className='section-tour__desc'>
@@ -84,6 +84,7 @@ const TourDetails = ({ getTour, tour, match }) => {
 										Next Date
 									</p>
 									<p>June 2021</p>
+									{/* <p>{(tour.startDates[0] * 1).toLocaleString('en-us', { month: 'long', year: 'numeric' })}</p> */}
 									<p className='quick-facts__name'>
 										<svg className='quick-facts__icon'>
 											<use xlinkHref='/img/sprite.svg#icon-trending_up' />
@@ -111,8 +112,8 @@ const TourDetails = ({ getTour, tour, match }) => {
 							<div className='tour-guides'>
 								<h3 className='tour-guides__title'>Tour Guides for this tour</h3>
 								{tour.guides.map((guide) => (
-									<div className='tour-guide'>
-										<img src='/img/user-1.jpg' alt='Tour Guide' className='tour-guide__img' />
+									<div className='tour-guide' key={guide._id}>
+										<img src={`/img/users/${guide.photo}`} alt={guide.name} className='tour-guide__img' />
 										<div className='tour-guide__details'>
 											<h4 className='tour-guide__name'>{guide.name}</h4>
 											<p className='tour-guide__desig'>
@@ -198,38 +199,15 @@ const TourDetails = ({ getTour, tour, match }) => {
 				<section className='tour-reviews mb-3'>
 					<h3 className='tour-reviews__title'>Tour Reviews</h3>
 
-					<div className='tour-review'>
-						<div className='tour-review__name'>
-							<img src='/img/user-3.jpg' alt='Name' className='tour-review__name--img' />
-							<h5 className='tour-review__name--title'>Miyah Myles</h5>
+					{tour.reviews.map((review) => (
+						<div className='tour-review' key={review._id}>
+							<div className='tour-review__name'>
+								<img src={`/img/users/${review.user.photo}`} alt='Name' className='tour-review__name--img' />
+								<h5 className='tour-review__name--title'>{review.user.name}</h5>
+							</div>
+							<p className='tour-review__review'>{review.review}</p>
 						</div>
-						<p className='tour-review__review'>
-							Cras mollis nisi parturient mi nec aliquet suspendisse sagittis eros condimentum scelerisque taciti mattis
-							praesent feugiat eu nascetur a tincidunt
-						</p>
-					</div>
-
-					<div className='tour-review'>
-						<div className='tour-review__name'>
-							<img src='/img/user-3.jpg' alt='Name' className='tour-review__name--img' />
-							<h5 className='tour-review__name--title'>Miyah Myles</h5>
-						</div>
-						<p className='tour-review__review'>
-							Cras mollis nisi parturient mi nec aliquet suspendisse sagittis eros condimentum scelerisque taciti mattis
-							praesent feugiat eu nascetur a tincidunt
-						</p>
-					</div>
-
-					<div className='tour-review'>
-						<div className='tour-review__name'>
-							<img src='/img/user-3.jpg' alt='Name' className='tour-review__name--img' />
-							<h5 className='tour-review__name--title'>Miyah Myles</h5>
-						</div>
-						<p className='tour-review__review'>
-							Cras mollis nisi parturient mi nec aliquet suspendisse sagittis eros condimentum scelerisque taciti mattis
-							praesent feugiat eu nascetur a tincidunt
-						</p>
-					</div>
+					))}
 				</section>
 			</Fragment>
 		)
