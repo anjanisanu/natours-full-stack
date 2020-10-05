@@ -1,5 +1,6 @@
 export const GET_TOURS = 'GET_TOURS';
 export const GET_TOP_TOURS = 'GET_TOP_TOURS';
+export const GET_TOP_REVIEWS = 'GET_TOP_REVIEWS';
 export const CLEAR_TOURS = 'CLEAR_TOURS';
 export const GET_TOUR = 'GET_TOUR';
 export const ADD_TOUR = 'ADD_TOUR';

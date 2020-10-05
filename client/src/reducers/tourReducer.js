@@ -1,9 +1,10 @@
-import { GET_TOURS, GET_TOP_TOURS, GET_TOUR, TOUR_ERROR } from './../actions/types';
+import { GET_TOURS, GET_TOP_TOURS, GET_TOP_REVIEWS, GET_TOUR, TOUR_ERROR } from './../actions/types';
 
 const intialState = {
 	topTours: null,
 	tours: null,
 	tour: null,
+	reviews: null,
 	current: null,
 	error: null
 };
@@ -20,6 +21,12 @@ export default (state = intialState, action) => {
 			return {
 				...state,
 				topTours: action.payload
+			};
+
+		case GET_TOP_REVIEWS:
+			return {
+				...state,
+				reviews: action.payload
 			};
 
 		case GET_TOUR:

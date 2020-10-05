@@ -1,18 +1,20 @@
 import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getTopTours } from './../../actions/tourActions';
+import { Link } from 'react-router-dom';
+import { getTopTours, getTopReviews } from './../../actions/tourActions';
 
 import Slider from '../layout/homepage/Slider';
 import SearchBox from '../layout/homepage/SearchBox';
 import Highlights from '../layout/homepage/Highlights';
 import About from '../layout/homepage/About';
 import Tour from '../layout/homepage/Tour';
-import { Link } from 'react-router-dom';
+import Review from './../layout/Review';
 
-const Home = ({ getTopTours, topTours }) => {
+const Home = ({ getTopTours, getTopReviews, topTours, reviews }) => {
 	useEffect(
 		() => {
 			getTopTours();
+			getTopReviews();
 		},
 		//eslint-disable-next-line
 		[]
@@ -34,12 +36,15 @@ const Home = ({ getTopTours, topTours }) => {
 					View All Tours &rarr;
 				</Link>
 			</section>
+
+			<Review reviews={reviews} />
 		</Fragment>
 	);
 };
 
 const mapStateToProps = (state) => ({
-	topTours: state.tours.topTours
+	topTours: state.tours.topTours,
+	reviews: state.tours.reviews
 });
 
-export default connect(mapStateToProps, { getTopTours })(Home);
+export default connect(mapStateToProps, { getTopTours, getTopReviews })(Home);

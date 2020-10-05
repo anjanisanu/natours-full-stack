@@ -1,6 +1,8 @@
 import React, { Fragment, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+
+import Breadcrumb from './../layout/Breadcrumb';
+import Review from './../layout/Review';
 import { getTour } from '../../actions/tourActions';
 
 const TourDetails = ({ getTour, tour, match }) => {
@@ -12,30 +14,7 @@ const TourDetails = ({ getTour, tour, match }) => {
 	return (
 		tour !== null && (
 			<Fragment>
-				<section className='breadcrumb'>
-					<div className='breadcrumb__content'>
-						<h1 className='breadcrumb__heading'>{tour.name}</h1>
-					</div>
-					<nav className='breadcrumb__nav'>
-						<ul className='breadcrumb__links'>
-							<li>
-								<Link to='/' className='breadcrumb__link'>
-									Home
-								</Link>
-							</li>
-							<li>
-								<Link to='/tours' className='breadcrumb__link'>
-									Tours
-								</Link>
-							</li>
-							<li>
-								<Link to='#!' className='breadcrumb__link active'>
-									{tour.name}
-								</Link>
-							</li>
-						</ul>
-					</nav>
-				</section>
+				<Breadcrumb title={tour.name} />
 
 				<section className='section-tour mb-3'>
 					<div className='section-tour__details'>
@@ -197,19 +176,7 @@ const TourDetails = ({ getTour, tour, match }) => {
 						</div>
 					</div>
 				</section>
-				<section className='tour-reviews mb-3'>
-					<h3 className='tour-reviews__title'>Tour Reviews</h3>
-
-					{tour.reviews.map((review) => (
-						<div className='tour-review' key={review._id}>
-							<div className='tour-review__name'>
-								<img src={`/img/users/${review.user.photo}`} alt='Name' className='tour-review__name--img' />
-								<h5 className='tour-review__name--title'>{review.user.name}</h5>
-							</div>
-							<p className='tour-review__review'>{review.review}</p>
-						</div>
-					))}
-				</section>
+				<Review tour={tour} />
 			</Fragment>
 		)
 	);

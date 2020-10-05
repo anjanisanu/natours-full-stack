@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_TOURS, GET_TOP_TOURS, GET_TOUR, TOUR_ERROR } from './types';
+import { GET_TOURS, GET_TOP_TOURS, GET_TOP_REVIEWS, GET_TOUR, TOUR_ERROR } from './types';
 
 export const getTours = () => async (dispatch) => {
 	try {
@@ -42,6 +42,23 @@ export const getTour = (tour) => async (dispatch) => {
 
 		dispatch({
 			type: GET_TOUR,
+			payload: data
+		});
+	} catch (err) {
+		dispatch({
+			type: TOUR_ERROR,
+			payload: err.response.data
+		});
+	}
+};
+
+export const getTopReviews = () => async (dispatch) => {
+	try {
+		const res = await axios.get('/api/v1/reviews?rating=5&limit=3');
+		const data = res.data.data;
+
+		dispatch({
+			type: GET_TOP_REVIEWS,
 			payload: data
 		});
 	} catch (err) {
