@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getTours } from './../../actions/tourActions';
-import Tour from './../layout/Tour';
+import Tour from '../layout/homepage/Tour';
 
 const Tours = ({ getTours, tours }) => {
 	useEffect(

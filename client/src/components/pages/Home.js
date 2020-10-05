@@ -2,11 +2,11 @@ import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getTopTours } from './../../actions/tourActions';
 
-import Slider from './../layout/Slider';
-import SearchBox from './../layout/SearchBox';
-import Highlights from './../layout/Highlights';
-import About from './../layout/About';
-import Tour from './../layout/Tour';
+import Slider from '../layout/homepage/Slider';
+import SearchBox from '../layout/homepage/SearchBox';
+import Highlights from '../layout/homepage/Highlights';
+import About from '../layout/homepage/About';
+import Tour from '../layout/homepage/Tour';
 import { Link } from 'react-router-dom';
 
 const Home = ({ getTopTours, topTours }) => {
