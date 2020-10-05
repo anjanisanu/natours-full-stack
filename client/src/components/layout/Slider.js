@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const slider = () => {
 	return (
@@ -7,9 +8,9 @@ const slider = () => {
 				<h1 className='slider__heading'>
 					Outdoors <span>is where things happens</span>
 				</h1>
-				<a href='#!' className='btn tours-btn'>
+				<Link to='/tours' className='btn tours-btn'>
 					View All Tours &rarr;
-				</a>
+				</Link>
 			</div>
 		</section>
 	);

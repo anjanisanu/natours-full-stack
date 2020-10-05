@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getTour } from '../../actions/tourActions';
 
@@ -18,19 +19,19 @@ const TourDetails = ({ getTour, tour, match }) => {
 					<nav className='breadcrumb__nav'>
 						<ul className='breadcrumb__links'>
 							<li>
-								<a href='index.html' className='breadcrumb__link'>
+								<Link to='/' className='breadcrumb__link'>
 									Home
-								</a>
+								</Link>
 							</li>
 							<li>
-								<a href='tours.html' className='breadcrumb__link'>
+								<Link to='/tours' className='breadcrumb__link'>
 									Tours
-								</a>
+								</Link>
 							</li>
 							<li>
-								<a href='tour-details.html' className='breadcrumb__link active'>
+								<Link to='#!' className='breadcrumb__link active'>
 									{tour.name}
-								</a>
+								</Link>
 							</li>
 						</ul>
 					</nav>

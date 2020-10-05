@@ -7,6 +7,7 @@ import SearchBox from './../layout/SearchBox';
 import Highlights from './../layout/Highlights';
 import About from './../layout/About';
 import Tour from './../layout/Tour';
+import { Link } from 'react-router-dom';
 
 const Home = ({ getTopTours, topTours }) => {
 	useEffect(
@@ -29,9 +30,9 @@ const Home = ({ getTopTours, topTours }) => {
 
 				{topTours !== null && topTours.map((tour) => <Tour key={tour._id} tour={tour} />)}
 
-				<a href='#!' className='btn tours__btn mt-2' title='Tour Details'>
+				<Link to='/tours' className='btn tours__btn mt-2' title='Tour Details'>
 					View All Tours &rarr;
-				</a>
+				</Link>
 			</section>
 		</Fragment>
 	);

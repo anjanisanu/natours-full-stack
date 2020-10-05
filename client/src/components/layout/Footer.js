@@ -1,34 +1,30 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
 	return (
 		<footer className='footer'>
-			{/* <div className='footer__logo'>
-				<a href='#!' className='footer__logo--img'>
-					<img src='./img/footer-logo.png' alt='Natours Footer Logo' />
-				</a>
-			</div> */}
 			<nav className='footer__nav'>
 				<ul className='footer__nav--links'>
 					<li>
-						<a className='footer__nav--link' href='#!'>
+						<Link to='/' className='footer__nav--link'>
 							Home
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a className='footer__nav--link' href='#!'>
+						<Link to='#!' className='footer__nav--link'>
 							About
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a className='footer__nav--link' href='#!'>
+						<Link to='/tours' className='footer__nav--link'>
 							Tours
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a className='footer__nav--link' href='#!'>
+						<Link to='#!' className='footer__nav--link'>
 							Contact Us
-						</a>
+						</Link>
 					</li>
 				</ul>
 			</nav>
