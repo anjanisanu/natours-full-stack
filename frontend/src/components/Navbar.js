@@ -1,35 +1,36 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
 	return (
 		<div className='navigation'>
 			<nav className='navigation__nav'>
 				<div className='logo'>
-					<a href='/' className='logo__link'>
-						<img src='./img/logo.png' alt='Natours logo' className='logo__img' />
-					</a>
+					<Link to='/' className='logo__link'>
+						<img src='/img/logo.png' alt='Natours logo' className='logo__img' />
+					</Link>
 				</div>
 
 				<ul className='navigation__navbar'>
 					<li>
-						<a href='/' className='navigation__navbar--links'>
+						<Link to='/' className='navigation__navbar--links'>
 							Home
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a href='#!' className='navigation__navbar--links'>
+						<Link to='/about' className='navigation__navbar--links'>
 							About Us
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a href='tours.html' className='navigation__navbar--links'>
+						<Link to='/tours' className='navigation__navbar--links'>
 							Tours
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a href='#!' className='navigation__navbar--links'>
+						<Link to='/contact' className='navigation__navbar--links'>
 							Contact Us
-						</a>
+						</Link>
 					</li>
 				</ul>
 			</nav>

@@ -1,6 +1,13 @@
 import axios from 'axios';
 
-import { TOP_TOUR_REQUEST, TOP_TOUR_SUCCESS, TOP_TOUR_FAIL } from './../constants/tourConstants';
+import {
+	TOP_TOUR_REQUEST,
+	TOP_TOUR_SUCCESS,
+	TOP_TOUR_FAIL,
+	TOUR_DETAILS_REQUEST,
+	TOUR_DETAILS_SUCCESS,
+	TOUR_DETAILS_FAIL
+} from './../constants/tourConstants';
 
 export const listTopTours = () => async (dispatch) => {
 	try {
@@ -19,6 +26,28 @@ export const listTopTours = () => async (dispatch) => {
 	} catch (err) {
 		dispatch({
 			type: TOP_TOUR_FAIL,
+			payload: err.response && err.response.data.message ? err.response.data.message : err.message
+		});
+	}
+};
+
+export const tourDetails = (id) => async (dispatch) => {
+	try {
+		dispatch({ type: TOUR_DETAILS_REQUEST });
+
+		const config = {
+			'Content-Type': 'application/json'
+		};
+
+		const { data } = await axios.get(`/tours/${id}`, config);
+
+		dispatch({
+			type: TOUR_DETAILS_SUCCESS,
+			payload: data
+		});
+	} catch (err) {
+		dispatch({
+			type: TOUR_DETAILS_FAIL,
 			payload: err.response && err.response.data.message ? err.response.data.message : err.message
 		});
 	}

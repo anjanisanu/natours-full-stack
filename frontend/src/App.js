@@ -4,19 +4,21 @@ import Header from './components/Header';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HomeScreen from './screens/HomeScreen';
+import TourDetailsScreen from './screens/TourDetailsScren';
 
 const App = () => {
 	return (
-		<div className='container'>
-			<Header />
-			<Navbar />
-			<main className='main'>
-				<Router>
+		<Router>
+			<div className='container'>
+				<Header />
+				<Navbar />
+				<main className='main'>
 					<Route exact path='/' component={HomeScreen} />
-				</Router>
-			</main>
-			<Footer />
-		</div>
+					<Route exact path='/tours/:id' component={TourDetailsScreen} />
+				</main>
+				<Footer />
+			</div>
+		</Router>
 	);
 };
 
