@@ -4,7 +4,10 @@ import {
 	TOP_TOUR_FAIL,
 	TOUR_DETAILS_REQUEST,
 	TOUR_DETAILS_SUCCESS,
-	TOUR_DETAILS_FAIL
+	TOUR_DETAILS_FAIL,
+	GET_ALL_TOURS_REQUEST,
+	GET_ALL_TOURS_SUCCESS,
+	GET_ALL_TOURS_FAIL
 } from './../constants/tourConstants';
 
 export const topToursReducer = (state = { tours: [] }, action) => {
@@ -16,6 +19,22 @@ export const topToursReducer = (state = { tours: [] }, action) => {
 			return { loading: false, tours: action.payload };
 
 		case TOP_TOUR_FAIL:
+			return { loading: false, error: action.payload };
+
+		default:
+			return state;
+	}
+};
+
+export const tourListReducer = (state = {}, action) => {
+	switch (action.type) {
+		case GET_ALL_TOURS_REQUEST:
+			return { loading: true };
+
+		case GET_ALL_TOURS_SUCCESS:
+			return { loading: false, tours: action.payload };
+
+		case GET_ALL_TOURS_FAIL:
 			return { loading: false, error: action.payload };
 
 		default:

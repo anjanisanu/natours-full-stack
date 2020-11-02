@@ -2,10 +2,11 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import { topToursReducer, tourDetailsReducer } from './reducers/tourReducers';
+import { topToursReducer, tourListReducer, tourDetailsReducer } from './reducers/tourReducers';
 
 const reducer = combineReducers({
 	topTours: topToursReducer,
+	tourList: tourListReducer,
 	tourDetails: tourDetailsReducer
 });
 

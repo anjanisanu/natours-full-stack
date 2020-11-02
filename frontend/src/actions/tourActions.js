@@ -6,7 +6,10 @@ import {
 	TOP_TOUR_FAIL,
 	TOUR_DETAILS_REQUEST,
 	TOUR_DETAILS_SUCCESS,
-	TOUR_DETAILS_FAIL
+	TOUR_DETAILS_FAIL,
+	GET_ALL_TOURS_REQUEST,
+	GET_ALL_TOURS_SUCCESS,
+	GET_ALL_TOURS_FAIL
 } from './../constants/tourConstants';
 
 export const listTopTours = () => async (dispatch) => {
@@ -26,6 +29,28 @@ export const listTopTours = () => async (dispatch) => {
 	} catch (err) {
 		dispatch({
 			type: TOP_TOUR_FAIL,
+			payload: err.response && err.response.data.message ? err.response.data.message : err.message
+		});
+	}
+};
+
+export const getAllTours = () => async (dispatch) => {
+	try {
+		dispatch({ type: GET_ALL_TOURS_REQUEST });
+
+		const config = {
+			'Content-Type': 'application/json'
+		};
+
+		const { data } = await axios.get(`/tours/`, config);
+
+		dispatch({
+			type: GET_ALL_TOURS_SUCCESS,
+			payload: data
+		});
+	} catch (err) {
+		dispatch({
+			type: GET_ALL_TOURS_FAIL,
 			payload: err.response && err.response.data.message ? err.response.data.message : err.message
 		});
 	}
