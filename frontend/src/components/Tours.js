@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Tour from './../components/Tour';
+import Spinner from './../components/layout/Spinner';
 
 const Tours = ({ title, allTours, button }) => {
 	const { loading, error, tours } = allTours;
@@ -9,7 +10,7 @@ const Tours = ({ title, allTours, button }) => {
 			<h2 className='heading-2 tours__heading'>{title}</h2>
 
 			{loading ? (
-				<h2>Loading</h2>
+				<Spinner />
 			) : error ? (
 				<h3>{error}</h3>
 			) : (

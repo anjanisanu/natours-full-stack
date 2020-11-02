@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+import Header from './components/layout/Header';
+import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
 import HomeScreen from './screens/HomeScreen';
 import TourScreen from './screens/TourScreen';
 import TourDetailsScreen from './screens/TourDetailsScren';
