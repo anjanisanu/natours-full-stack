@@ -40,7 +40,7 @@ const Tour = ({ tour }) => {
 					</div>
 				</div>
 
-				<Link to={`/tours/${tour._id}`} className='btn details-btn' title='Tour Details'>
+				<Link to={`/tours/${tour.slug}`} className='btn details-btn' title='Tour Details'>
 					&rarr;
 				</Link>
 			</div>

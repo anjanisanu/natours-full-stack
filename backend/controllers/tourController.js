@@ -4,7 +4,7 @@ const { getAll, getOne, createOne, updateOne, deleteOne } = require('./handleFac
 exports.aliasTopTours = (req, res, next) => {
 	req.query.limit = '3';
 	req.query.sort = '-ratingsAverage, price';
-	req.query.fields = 'name,duration,summary,difficulty,startLocation,startDates,locations,maxGroupSize';
+	req.query.fields = 'name,duration,summary,difficulty,startLocation,startDates,locations,maxGroupSize,slug';
 
 	next();
 };

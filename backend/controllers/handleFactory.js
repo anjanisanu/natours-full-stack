@@ -21,10 +21,15 @@ exports.getAll = (Model) =>
 
 exports.getOne = (Model, populateOptions) =>
 	catchAsync(async (req, res, next) => {
-		let query = Model.findById(req.params.id);
-		if (populateOptions) query = query.populate(populateOptions);
+		let query = Model.findOne({ slug: req.params.id });
 
-		const doc = await query;
+		let doc = await query;
+
+		if (!doc) {
+			query = Model.findById(req.params.id);
+			if (populateOptions) query = query.populate(populateOptions);
+			doc = await query;
+		}
 
 		if (!doc) return next(new AppError('No document found with that ID', 404));
 
