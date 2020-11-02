@@ -1,0 +1,3 @@
+export const TOP_TOUR_REQUEST = 'TOP_TOUR_REQUEST';
+export const TOP_TOUR_SUCCESS = 'TOP_TOUR_SUCCESS';
+export const TOP_TOUR_FAIL = 'TOP_TOUR_FAIL';
